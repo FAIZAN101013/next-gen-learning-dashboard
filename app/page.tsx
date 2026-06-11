@@ -1,43 +1,42 @@
+// app/page.tsx
+import { Suspense } from "react";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import Sidebar from "@/layout/sidebar";
+import HeroTile from "@/components/dashboard/hero-tile";
+import CourseGrid from "@/components/dashboard/course-grid";
+import ActivityTile from "@/components/dashboard/activity-tile";
+import MotionWrapper from "@/components/ui/motion-wrapper";
+import Loading from "./loading";
 
-export default async function Home() {
+async function Dashboard() {
   const supabase = createSupabaseServerClient();
-
-  const { data: courses, error } = await supabase
-    .from("courses")
-    .select("*");
+  const { data: courses, error } = await supabase.from("courses").select("*");
 
   if (error) {
     return (
-      <main className="min-h-screen bg-zinc-950 text-white p-10">
-        Failed to load courses.
-      </main>
+      <p className="flex-1 p-10 text-red-400">Failed to load dashboard.</p>
     );
   }
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white p-10">
-      <h1 className="text-3xl font-bold mb-8">
-        Next-Gen Learning Dashboard
-      </h1>
+    <section className="flex-1 p-6">
+      <MotionWrapper className="grid gap-6 grid-cols-1 md:grid-cols-3">
+        <HeroTile />
+        <ActivityTile />
+        <CourseGrid courses={courses} />
+      </MotionWrapper>
+    </section>
+  );
+}
 
-      <div className="space-y-4">
-        {courses.map((course) => (
-          <div
-            key={course.id}
-            className="rounded-xl border border-zinc-800 p-4"
-          >
-            <h2 className="font-semibold">{course.title}</h2>
-
-            <p className="text-zinc-400">
-              Progress: {course.progress}%
-            </p>
-
-            <p className="text-zinc-500">
-              Icon: {course.icon_name}
-            </p>
-          </div>
-        ))}
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-zinc-950 text-white pb-24 md:pb-0">
+      <div className="flex">
+        <Sidebar />
+        <Suspense fallback={<Loading />}>
+          <Dashboard />
+        </Suspense>
       </div>
     </main>
   );

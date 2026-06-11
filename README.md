@@ -1,36 +1,225 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next-Gen Learning Dashboard
+
+A futuristic, animated student dashboard built with **Next.js App Router**, **Supabase**, **Tailwind CSS**, and **Framer Motion**. This project was developed as part of a Frontend Intern Challenge focused on modern frontend architecture, performant animations, and server-rendered data fetching.
+
+## Live Demo
+
+**Vercel Deployment:** [Add your deployed URL here]
+
+## GitHub Repository
+
+**Repository:** [Add your GitHub repository URL here]
+
+---
+
+## Features
+
+* 🌙 Dark-mode-only futuristic UI
+* 📦 Bento Grid dashboard layout
+* ⚡ Server-side data fetching using Next.js Server Components
+* 🗄️ Supabase PostgreSQL integration
+* 📊 Dynamic course cards fetched from the database
+* 🎯 Animated progress indicators
+* ✨ Framer Motion staggered entrance animations
+* 🚀 Spring-based hover interactions
+* 📱 Responsive design for desktop, tablet, and mobile devices
+* 🎨 Dynamic Lucide icons rendered from database values
+
+---
+
+## Tech Stack
+
+### Framework
+
+* Next.js 16 (App Router)
+
+### Database / Backend
+
+* Supabase
+* PostgreSQL
+
+### Styling
+
+* Tailwind CSS
+
+### Animations
+
+* Framer Motion
+
+### Icons
+
+* Lucide React
+
+### Language
+
+* TypeScript
+
+---
+
+## Database Schema
+
+### `courses`
+
+| Column     | Type               |
+| ---------- | ------------------ |
+| id         | uuid (Primary Key) |
+| title      | text               |
+| progress   | integer            |
+| icon_name  | text               |
+| created_at | timestamp          |
+
+---
+
+## Architecture Decisions
+
+### Server Components for Data Fetching
+
+Course data is fetched using **Next.js Server Components**. This approach was chosen to:
+
+* Reduce client-side JavaScript
+* Improve initial page performance
+* Keep database access logic on the server
+* Provide a better user experience through faster page loads
+
+---
+
+### Component Structure
+
+The application was divided into reusable components to improve maintainability and scalability.
+
+```text
+app/
+components/
+  dashboard/
+  layout/
+  ui/
+lib/
+  supabase/
+types/
+```
+
+This separation ensures:
+
+* Routing concerns remain within `app/`
+* UI components remain reusable
+* Utility functions are centralized
+* Type definitions stay consistent across the application
+
+---
+
+### Animation Strategy
+
+Framer Motion was used for all interactive animations.
+
+Key principles followed:
+
+* Use of **transform** properties (`scale`, `translateY`)
+* Opacity-based entrance animations
+* Spring physics for natural interactions
+* Avoidance of layout-shifting animations
+
+This helps maintain smooth performance while satisfying the assignment requirements.
+
+---
+
+## Responsive Design
+
+### Desktop (>1024px)
+
+* Sidebar navigation
+* Multi-column Bento Grid layout
+
+### Tablet (768px–1024px)
+
+* Collapsed navigation
+* Two-column dashboard layout
+
+### Mobile (<768px)
+
+* Stacked dashboard layout
+* Navigation adapted for smaller screens
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Clone the Repository
+
+```bash
+git clone <repository-url>
+cd next-gen-learning-dashboard
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Configure Environment Variables
+
+Create a `.env.local` file in the project root.
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
+
+---
+
+### Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+The following environment variables are required:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+An example configuration is included in:
 
-## Deploy on Vercel
+```text
+.env.example
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Challenges Faced
+
+* Designing a Bento Grid layout that remained visually balanced across breakpoints.
+* Integrating Supabase with Server Components while maintaining a clean separation between server and client logic.
+* Implementing performant animations without introducing layout shifts.
+* Dynamically rendering icons from database values using Lucide React.
+
+---
+
+## Future Improvements
+
+* Sidebar layout animations using Framer Motion `layoutId`
+* Skeleton loading states for Suspense boundaries
+* Bottom navigation for mobile devices
+* Enhanced activity analytics visualizations
+
+---
+
+## Author
+
+**Mohammed Faizan Patel**
+
+Portfolio: https://faziansportfolio.netlify.app/
+
+LinkedIn: https://www.linkedin.com/in/mohammed-faizan-p-6939821b5
