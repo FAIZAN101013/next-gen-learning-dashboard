@@ -1,4 +1,5 @@
 import * as Icons from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 import { Course } from "@/types/course";
 import Tile from "../ui/tile";
@@ -9,9 +10,10 @@ interface Props {
 }
 
 export default function CourseCard({ course }: Props) {
-  const Icon =
-    Icons[course.icon_name as keyof typeof Icons] ??
-    Icons.BookOpen;
+const Icon =
+  (Icons[
+    course.icon_name as keyof typeof Icons
+  ] as LucideIcon) || Icons.BookOpen;
 
   return (
     <Tile className="relative overflow-hidden p-5">
